@@ -69,6 +69,7 @@
 								</goals>
 								<configuration>
 									<target>
+										<mkdir dir="${basedir}/src/main/wsdl" />
 										<get src="http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl" dest="${basedir}/src/main/wsdl/jirasoapservice-v2.wsdl" />
 									</target>
 								</configuration>
