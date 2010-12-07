@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -10,9 +11,9 @@
 
 	<groupId>uk.org.sappho.jira4j.soap</groupId>
 	<artifactId>jira4j-soap</artifactId>
-	<version>4.2-SNAPSHOT</version>
+	<version>4.2.0.0-SNAPSHOT</version>
 	<name>Jira4J SOAP</name>
-	<description>A thin Java layer over the Jira SOAP service to avoid duplication in many clients</description>
+	<description>A thin Java layer over the standard Jira SOAP service and the Sappho GetParent service to avoid duplication in many clients</description>
 
 	<scm>
 		<connection>scm:git:https://github.com/andrewheald/jira4j-soap.git</connection>
@@ -70,7 +71,9 @@
 								<configuration>
 									<target>
 										<mkdir dir="${basedir}/src/main/wsdl" />
-										<get src="http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl" dest="${basedir}/src/main/wsdl/jirasoapservice-v2.wsdl" />
+										<get
+											src="http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl"
+											dest="${basedir}/src/main/wsdl/jirasoapservice-v2.wsdl" />
 									</target>
 								</configuration>
 							</execution>
@@ -87,12 +90,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>axistools-maven-plugin</artifactId>
 				<version>1.3</version>
-				<configuration>
-					<wsdlFiles>
-						<wsdlFile>jirasoapservice-v2.wsdl</wsdlFile>
-					</wsdlFiles>
-					<packageSpace>com.atlassian.jira.rpc.soap.client</packageSpace>
-				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>javax.activation</groupId>
@@ -107,11 +104,30 @@
 				</dependencies>
 				<executions>
 					<execution>
-						<id>wsdl2java-generation</id>
+						<id>jira-wsdl2java-generation</id>
 						<phase>process-sources</phase>
 						<goals>
 							<goal>wsdl2java</goal>
 						</goals>
+						<configuration>
+							<wsdlFiles>
+								<wsdlFile>jirasoapservice-v2.wsdl</wsdlFile>
+							</wsdlFiles>
+							<packageSpace>com.atlassian.jira.rpc.soap.client</packageSpace>
+						</configuration>
+					</execution>
+					<execution>
+						<id>getparent-wsdl2java-generation</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+						<configuration>
+							<wsdlFiles>
+								<wsdlFile>sappho-getparent-v1.wsdl</wsdlFile>
+							</wsdlFiles>
+							<packageSpace>uk.org.sappho.jira.rpc.soap.client</packageSpace>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
