@@ -4,24 +4,32 @@
 Built on Oct 05, 2005 (05:23:37 EDT)-->
  <wsdl:types>
   <schema targetNamespace="http://exception.rpc.jira.atlassian.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1"/>
    <import namespace="http://xml.apache.org/xml-soap"/>
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
    <complexType name="RemoteException">
     <sequence/>
    </complexType>
   </schema>
-  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+  <schema targetNamespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
    <import namespace="http://exception.rpc.jira.atlassian.com"/>
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
-   <complexType name="mapItem">
-    <sequence>
-     <element name="key" nillable="true" type="xsd:anyType"/>
-     <element name="value" nillable="true" type="xsd:anyType"/>
-    </sequence>
+   <complexType name="ArrayOf_xsd_anyType">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+     </restriction>
+    </complexContent>
    </complexType>
-   <complexType name="Map">
+  </schema>
+  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1"/>
+   <import namespace="http://exception.rpc.jira.atlassian.com"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Vector">
     <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="apachesoap:mapItem"/>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
     </sequence>
    </complexType>
   </schema>
@@ -35,17 +43,17 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getModifiedFieldsRequest">
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part name="loginReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMovedIssueKeyRequest">
 
       <wsdl:part name="in0" type="xsd:string"/>
 
       <wsdl:part name="in1" type="xsd:string"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="loginResponse">
-
-      <wsdl:part name="loginReturn" type="xsd:string"/>
 
    </wsdl:message>
 
@@ -55,9 +63,9 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getModifiedFieldsResponse">
+   <wsdl:message name="getMovedIssueKeyResponse">
 
-      <wsdl:part name="getModifiedFieldsReturn" type="apachesoap:Map"/>
+      <wsdl:part name="getMovedIssueKeyReturn" type="xsd:string"/>
 
    </wsdl:message>
 
@@ -75,6 +83,22 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getFieldHistoryResponse">
+
+      <wsdl:part name="getFieldHistoryReturn" type="impl:ArrayOf_xsd_anyType"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFieldHistoryRequest">
+
+      <wsdl:part name="in0" type="xsd:string"/>
+
+      <wsdl:part name="in1" type="xsd:string"/>
+
+      <wsdl:part name="in2" type="xsd:string"/>
+
+   </wsdl:message>
+
    <wsdl:portType name="GetParent">
 
       <wsdl:operation name="login" parameterOrder="in0 in1">
@@ -87,21 +111,31 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getModifiedFields" parameterOrder="in0 in1">
-
-         <wsdl:input message="impl:getModifiedFieldsRequest" name="getModifiedFieldsRequest"/>
-
-         <wsdl:output message="impl:getModifiedFieldsResponse" name="getModifiedFieldsResponse"/>
-
-         <wsdl:fault message="impl:RemoteException" name="RemoteException"/>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getParentKey" parameterOrder="in0 in1">
 
          <wsdl:input message="impl:getParentKeyRequest" name="getParentKeyRequest"/>
 
          <wsdl:output message="impl:getParentKeyResponse" name="getParentKeyResponse"/>
+
+         <wsdl:fault message="impl:RemoteException" name="RemoteException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMovedIssueKey" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:getMovedIssueKeyRequest" name="getMovedIssueKeyRequest"/>
+
+         <wsdl:output message="impl:getMovedIssueKeyResponse" name="getMovedIssueKeyResponse"/>
+
+         <wsdl:fault message="impl:RemoteException" name="RemoteException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFieldHistory" parameterOrder="in0 in1 in2">
+
+         <wsdl:input message="impl:getFieldHistoryRequest" name="getFieldHistoryRequest"/>
+
+         <wsdl:output message="impl:getFieldHistoryResponse" name="getFieldHistoryResponse"/>
 
          <wsdl:fault message="impl:RemoteException" name="RemoteException"/>
 
@@ -137,17 +171,17 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getModifiedFields">
+      <wsdl:operation name="getParentKey">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getModifiedFieldsRequest">
+         <wsdl:input name="getParentKeyRequest">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getModifiedFieldsResponse">
+         <wsdl:output name="getParentKeyResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
 
@@ -161,17 +195,41 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getParentKey">
+      <wsdl:operation name="getMovedIssueKey">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getParentKeyRequest">
+         <wsdl:input name="getMovedIssueKeyRequest">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getParentKeyResponse">
+         <wsdl:output name="getMovedIssueKeyResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="RemoteException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFieldHistory">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFieldHistoryRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFieldHistoryResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
 
