@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -25,6 +24,21 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>uk.org.sappho.jira.soap</groupId>
+			<artifactId>jira-soap-getparent</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.atlassian.jira.plugins</groupId>
+					<artifactId>atlassian-jira-rpc-plugin</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.atlassian.jira</groupId>
+					<artifactId>atlassian-jira</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>axis</groupId>
 			<artifactId>axis</artifactId>
@@ -71,9 +85,7 @@
 								<configuration>
 									<target>
 										<mkdir dir="${basedir}/src/main/wsdl" />
-										<get
-											src="http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl"
-											dest="${basedir}/src/main/wsdl/jirasoapservice-v2.wsdl" />
+										<get src="http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl" dest="${basedir}/src/main/wsdl/jirasoapservice-v2.wsdl" />
 									</target>
 								</configuration>
 							</execution>
@@ -126,7 +138,7 @@
 							<wsdlFiles>
 								<wsdlFile>sappho-getparent-v1.wsdl</wsdlFile>
 							</wsdlFiles>
-							<packageSpace>uk.org.sappho.jira.rpc.soap.client</packageSpace>
+							<packageSpace>uk.org.sappho.jira.rpc.soap.client.getparent</packageSpace>
 						</configuration>
 					</execution>
 				</executions>

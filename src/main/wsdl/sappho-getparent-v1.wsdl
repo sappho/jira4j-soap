@@ -1,101 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" xmlns:intf="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="http://exception.rpc.jira.atlassian.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<!--WSDL created by Apache Axis version: 1.3
-Built on Oct 05, 2005 (05:23:37 EDT)-->
+<wsdl:definitions targetNamespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://getparent.service.soap.rpc.jira.sappho.org.uk" xmlns:intf="http://getparent.service.soap.rpc.jira.sappho.org.uk" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://exception.rpc.jira.atlassian.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema targetNamespace="http://exception.rpc.jira.atlassian.com" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1"/>
-   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk"/>
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
    <complexType name="RemoteException">
     <sequence/>
    </complexType>
   </schema>
-  <schema targetNamespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://xml.apache.org/xml-soap"/>
+  <schema targetNamespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://exception.rpc.jira.atlassian.com"/>
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
-   <complexType name="ArrayOf_xsd_anyType">
+   <complexType name="ArrayOf_soapenc_string">
     <complexContent>
      <restriction base="soapenc:Array">
-      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="soapenc:string[]"/>
      </restriction>
     </complexContent>
    </complexType>
   </schema>
-  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1"/>
-   <import namespace="http://exception.rpc.jira.atlassian.com"/>
-   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
-   <complexType name="Vector">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
-    </sequence>
-   </complexType>
-  </schema>
  </wsdl:types>
-
-   <wsdl:message name="loginRequest">
-
-      <wsdl:part name="in0" type="xsd:string"/>
-
-      <wsdl:part name="in1" type="xsd:string"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="loginResponse">
-
-      <wsdl:part name="loginReturn" type="xsd:string"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getMovedIssueKeyRequest">
-
-      <wsdl:part name="in0" type="xsd:string"/>
-
-      <wsdl:part name="in1" type="xsd:string"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="RemoteException">
-
-      <wsdl:part name="fault" type="tns1:RemoteException"/>
-
-   </wsdl:message>
 
    <wsdl:message name="getMovedIssueKeyResponse">
 
-      <wsdl:part name="getMovedIssueKeyReturn" type="xsd:string"/>
+      <wsdl:part name="getMovedIssueKeyReturn" type="soapenc:string"/>
 
    </wsdl:message>
 
    <wsdl:message name="getParentKeyResponse">
 
-      <wsdl:part name="getParentKeyReturn" type="xsd:string"/>
+      <wsdl:part name="getParentKeyReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMovedIssueKeyRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RemoteException">
+
+      <wsdl:part name="fault" type="tns2:RemoteException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFieldChangeHistoryRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
+
+      <wsdl:part name="in2" type="impl:ArrayOf_soapenc_string"/>
 
    </wsdl:message>
 
    <wsdl:message name="getParentKeyRequest">
 
-      <wsdl:part name="in0" type="xsd:string"/>
+      <wsdl:part name="in0" type="soapenc:string"/>
 
-      <wsdl:part name="in1" type="xsd:string"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getFieldHistoryResponse">
-
-      <wsdl:part name="getFieldHistoryReturn" type="impl:ArrayOf_xsd_anyType"/>
+      <wsdl:part name="in1" type="soapenc:string"/>
 
    </wsdl:message>
 
-   <wsdl:message name="getFieldHistoryRequest">
+   <wsdl:message name="getFieldChangeHistoryResponse">
 
-      <wsdl:part name="in0" type="xsd:string"/>
+      <wsdl:part name="getFieldChangeHistoryReturn" type="soapenc:string"/>
 
-      <wsdl:part name="in1" type="xsd:string"/>
+   </wsdl:message>
 
-      <wsdl:part name="in2" type="xsd:string"/>
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part name="loginReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+      <wsdl:part name="in1" type="soapenc:string"/>
 
    </wsdl:message>
 
@@ -131,11 +119,11 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getFieldHistory" parameterOrder="in0 in1 in2">
+      <wsdl:operation name="getFieldChangeHistory" parameterOrder="in0 in1 in2">
 
-         <wsdl:input message="impl:getFieldHistoryRequest" name="getFieldHistoryRequest"/>
+         <wsdl:input message="impl:getFieldChangeHistoryRequest" name="getFieldChangeHistoryRequest"/>
 
-         <wsdl:output message="impl:getFieldHistoryResponse" name="getFieldHistoryResponse"/>
+         <wsdl:output message="impl:getFieldChangeHistoryResponse" name="getFieldChangeHistoryResponse"/>
 
          <wsdl:fault message="impl:RemoteException" name="RemoteException"/>
 
@@ -153,19 +141,19 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
          <wsdl:input name="loginRequest">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
          <wsdl:output name="loginResponse">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:output>
 
          <wsdl:fault name="RemoteException">
 
-            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:fault>
 
@@ -177,19 +165,19 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
          <wsdl:input name="getParentKeyRequest">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
          <wsdl:output name="getParentKeyResponse">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:output>
 
          <wsdl:fault name="RemoteException">
 
-            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:fault>
 
@@ -201,43 +189,43 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
          <wsdl:input name="getMovedIssueKeyRequest">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
          <wsdl:output name="getMovedIssueKeyResponse">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:output>
 
          <wsdl:fault name="RemoteException">
 
-            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:fault>
 
       </wsdl:operation>
 
-      <wsdl:operation name="getFieldHistory">
+      <wsdl:operation name="getFieldChangeHistory">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getFieldHistoryRequest">
+         <wsdl:input name="getFieldChangeHistoryRequest">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.soap.jira.sappho.org.uk" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getFieldHistoryResponse">
+         <wsdl:output name="getFieldChangeHistoryResponse">
 
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:output>
 
          <wsdl:fault name="RemoteException">
 
-            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://jira.catlin.com/rpc/soap/sappho-getparent-v1" use="encoded"/>
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="RemoteException" namespace="http://getparent.service.soap.rpc.jira.sappho.org.uk" use="encoded"/>
 
          </wsdl:fault>
 
@@ -249,7 +237,7 @@ Built on Oct 05, 2005 (05:23:37 EDT)-->
 
       <wsdl:port binding="impl:sappho-getparent-v1SoapBinding" name="sappho-getparent-v1">
 
-         <wsdlsoap:address location="http://jira.catlin.com/rpc/soap/sappho-getparent-v1"/>
+         <wsdlsoap:address location="http://localhost/rpc/soap/sappho-getparent-v1"/>
 
       </wsdl:port>
 
