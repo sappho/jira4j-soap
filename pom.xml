@@ -12,7 +12,7 @@
 	<artifactId>jira4j-soap</artifactId>
 	<version>4.2.0.0-SNAPSHOT</version>
 	<name>Jira4J SOAP</name>
-	<description>A thin Java layer over the standard Jira SOAP service and the Sappho GetParent service to avoid duplication in many clients</description>
+	<description>A thin Java layer over the standard Jira SOAP service to avoid duplication in many clients</description>
 
 	<scm>
 		<connection>scm:git:https://github.com/andrewheald/jira4j-soap.git</connection>
@@ -24,21 +24,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>uk.org.sappho.jira.soap</groupId>
-			<artifactId>jira-soap-getparent</artifactId>
-			<version>${project.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.atlassian.jira.plugins</groupId>
-					<artifactId>atlassian-jira-rpc-plugin</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.atlassian.jira</groupId>
-					<artifactId>atlassian-jira</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		<dependency>
 			<groupId>axis</groupId>
 			<artifactId>axis</artifactId>
@@ -116,7 +101,7 @@
 				</dependencies>
 				<executions>
 					<execution>
-						<id>jira-wsdl2java-generation</id>
+						<id>wsdl2java</id>
 						<phase>process-sources</phase>
 						<goals>
 							<goal>wsdl2java</goal>
@@ -126,19 +111,6 @@
 								<wsdlFile>jirasoapservice-v2.wsdl</wsdlFile>
 							</wsdlFiles>
 							<packageSpace>com.atlassian.jira.rpc.soap.client</packageSpace>
-						</configuration>
-					</execution>
-					<execution>
-						<id>getparent-wsdl2java-generation</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>wsdl2java</goal>
-						</goals>
-						<configuration>
-							<wsdlFiles>
-								<wsdlFile>sappho-getparent-v1.wsdl</wsdlFile>
-							</wsdlFiles>
-							<packageSpace>uk.org.sappho.jira.rpc.soap.client.getparent</packageSpace>
 						</configuration>
 					</execution>
 				</executions>
