@@ -10,7 +10,7 @@
 
 	<groupId>uk.org.sappho.jira4j.soap</groupId>
 	<artifactId>jira4j-soap</artifactId>
-	<version>4.2.0.0-SNAPSHOT</version>
+	<version>4.2.0.0</version>
 	<name>Jira4J SOAP</name>
 	<description>A thin Java layer over the standard Jira SOAP service to avoid duplication in many clients</description>
 
