@@ -6,12 +6,14 @@ import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 
 import org.apache.axis.AxisFault;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.atlassian.jira.rpc.soap.client.RemoteAuthenticationException;
 
 public class JiraSoapServiceTest {
 
+    @Ignore
     @Test(expected = RemoteAuthenticationException.class)
     public void testBadLogin() throws MalformedURLException, RemoteException, ServiceException {
 
